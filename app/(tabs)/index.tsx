@@ -9,6 +9,7 @@ import { Button, Text } from 'react-native-elements';
 import TextInput from '@/components/TextInput';
 import PromptButton from '@/components/PromptButton';
 import AIResponse from '@/components/AIResponse';
+import { Dialog } from '@rneui/themed';
 
 export default function HomeScreen() {
   const inputText = useStore((state) => state.inputText);
@@ -73,7 +74,7 @@ export default function HomeScreen() {
         </View>
         <TextInput />
         <Button
-          title={loading ? 'Loading...' : 'Magic write'}
+          title={'Magic write'}
           onPress={handleSubmit}
           disabled={inputText.trim() === ''}
           containerStyle={{ marginTop: 10, borderRadius: 13 }}
@@ -91,6 +92,9 @@ export default function HomeScreen() {
         />
         <AIResponse />
       </ThemedView>
+      <Dialog isVisible={loading} overlayStyle={styles.dialog}>
+        <Dialog.Loading />
+      </Dialog>
     </ParallaxScrollView>
   );
 }
@@ -125,5 +129,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly'
+  },
+  dialog: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 20,
+    width: 25,
+    height: 25,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
