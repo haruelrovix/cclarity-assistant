@@ -1,5 +1,5 @@
-import type { PropsWithChildren, ReactElement } from 'react';
-import { StyleSheet, useColorScheme } from 'react-native';
+import { useState, type PropsWithChildren, type ReactElement } from 'react';
+import { StyleSheet, useColorScheme, View } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -8,6 +8,8 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { ThemedView } from '@/components/ThemedView';
+import { Icon, Switch } from '@rneui/themed';
+import { useStore } from '@/store/useStore';
 
 const HEADER_HEIGHT = 250;
 
@@ -24,6 +26,13 @@ export default function ParallaxScrollView({
   const colorScheme = useColorScheme() ?? 'light';
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
+  const [checked, setChecked] = useState<boolean>(false);
+  const toggleTheme = useStore((state) => state.toggleTheme);
+
+  const toggleSwitch = () => {
+    setChecked(!checked);
+    toggleTheme(checked ? 'light' : 'dark');
+  };
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -52,6 +61,16 @@ export default function ParallaxScrollView({
             headerAnimatedStyle,
           ]}>
           {headerImage}
+          <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', right: 0, bottom: 10 }}>
+            <Icon
+              name='light-mode' />
+            <Switch
+              value={checked}
+              onValueChange={toggleSwitch}
+            />
+            <Icon
+              name='dark-mode' />
+          </View>
         </Animated.View>
         <ThemedView style={styles.content}>{children}</ThemedView>
       </Animated.ScrollView>
@@ -69,7 +88,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 32,
+    padding: 4,
     gap: 16,
     overflow: 'hidden',
   },

@@ -1,4 +1,4 @@
-import { Button } from '@rneui/themed';
+import { Button } from 'react-native-elements';
 import { useStore } from '@/store/useStore';
 import React from 'react';
 
@@ -20,17 +20,17 @@ const PromptButton: React.FC<PromptButtonProps> = ({ prompt }) => {
       onPress={() => setInputText(content)}
       icon={{
         name: icon,
+        type: 'material',
         size: 15,
       }}
       type='outline'
-    buttonStyle={{
-      borderColor: '#86939E',
-      borderWidth: 1,
-      borderRadius: 13,
-      margin: 5,
-    }}
-    containerStyle={{ width: 300 }}
-    titleStyle={{ color: '#86939E', fontWeight: 'semibold' }}
+      buttonStyle={{
+        borderColor: '#86939E',
+        borderWidth: 1,
+        borderRadius: 13,
+        margin: 5,
+      }}
+      titleStyle={{ color: '#86939E', fontWeight: 'semibold' }}
     />
   );
 };
