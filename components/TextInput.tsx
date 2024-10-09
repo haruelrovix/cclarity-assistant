@@ -10,9 +10,11 @@ const TextInput: React.FC = () => {
     <Input
       value={inputText}
       onChangeText={setInputText}
-      placeholder='What do you want to write today?'
-      containerStyle={{ margin: 10 }}
-      inputStyle={{ height: 40 }}
+      placeholder="CClarity is a great tool to streamline workflow for Ghost Writers and Agencies to manage their customers' LinkedIn profile! Now writers can manage multiple LinkedIn accounts in one tool with ease!"
+      containerStyle={{ marginVertical: 10, maxWidth: 910 }}
+      inputStyle={{ height: 200, borderWidth: 1, borderColor: '#86939E', padding: 10, borderRadius: 20, color: '#86939E'  }}
+      inputContainerStyle={{ borderBottomWidth: 0 }}
+      multiline
     />
   );
 };

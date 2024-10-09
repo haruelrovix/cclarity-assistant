@@ -1,22 +1,36 @@
+import { Button } from '@rneui/themed';
 import { useStore } from '@/store/useStore';
 import React from 'react';
-import { Button } from 'react-native-elements';
 
 interface PromptButtonProps {
-  prompt: string;
+  prompt: {
+    icon: string;
+    title: string;
+    content: string;
+  }
 }
 
 const PromptButton: React.FC<PromptButtonProps> = ({ prompt }) => {
-  const setPrompt = useStore((state) => state.setPrompt);
+  const { title, icon, content } = prompt;
+  const setInputText = useStore((state) => state.setInputText);
+
   return (
     <Button
-      title={prompt}
-      onPress={() => setPrompt(prompt)}
-      containerStyle={{ margin: 5, width: '45%' }}
-      buttonStyle={{
-        backgroundColor: '#007BFF',
-        borderRadius: 5,
+      title={title}
+      onPress={() => setInputText(content)}
+      icon={{
+        name: icon,
+        size: 15,
       }}
+      type='outline'
+    buttonStyle={{
+      borderColor: '#86939E',
+      borderWidth: 1,
+      borderRadius: 13,
+      margin: 5,
+    }}
+    containerStyle={{ width: 300 }}
+    titleStyle={{ color: '#86939E', fontWeight: 'semibold' }}
     />
   );
 };

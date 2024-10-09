@@ -15,7 +15,7 @@ import AIResponse from '@/components/AIResponse';
 export default function HomeScreen() {
   const inputText = useStore((state) => state.inputText);
   const setAIResponse = useStore((state) => state.setAIResponse);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async () => {
     if (inputText.trim() === '') return;
@@ -68,19 +68,57 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <Text style={styles.header}>What do you want to write today?</Text>
         <View style={styles.buttonContainer}>
-          {['Prompt 1', 'Prompt 2', 'Prompt 3', 'Prompt 4', 'Prompt 5', 'Prompt 6'].map((prompt) => (
-            <PromptButton key={prompt} prompt={prompt} />
+          {[
+            {
+              icon: 'favorite',
+              title: 'My personal story',
+              content: "Let me share a personal journey that has shaped who I am today. It's a story about growth, challenges, and the valuable lessons learned along the way."
+            },
+            {
+              icon: 'compare-arrows',
+              title: 'My contrarian view',
+              content: "Most people believe X, but I see things differently. Here's why my perspective challenges the conventional wisdom on this topic."
+            },
+            {
+              icon: 'track-changes',
+              title: 'My challenge and solution',
+              content: "I faced a significant roadblock when trying to achieve my goals. Here's the strategy I used to overcome it, and how it led to success."
+            },
+            {
+              icon: 'lightbulb-outline',
+              title: 'A valuable insight',
+              content: "Through careful observation and analysis, I've gained an important insight that I believe can make a big difference. Here's what I discovered and why it matters."
+            },
+            {
+              icon: 'check-box',
+              title: 'What I did and learnt',
+              content: "This project pushed me to expand my skills. Here's what I accomplished, and the key lessons I learned in the process."
+            },
+            {
+              icon: 'campaign',
+              title: 'Promote an offer',
+              content: "I'm excited to share this exclusive offer with you! It's a limited-time opportunity that provides incredible value and benefits."
+            }
+          ].map((prompt, i) => (
+            <PromptButton key={`${i}-${prompt.title}`} prompt={prompt} />
           ))}
         </View>
         <TextInput />
         <Button
-          title={loading ? 'Loading...' : 'Write with AI'}
+          title={loading ? 'Loading...' : 'Magic write'}
           onPress={handleSubmit}
           disabled={inputText.trim() === ''}
-          containerStyle={{ marginTop: 10 }}
+          containerStyle={{ marginTop: 10, borderRadius: 13 }}
           buttonStyle={{
-            backgroundColor: '#007BFF',
+            backgroundColor: '#3b3b3b',
             borderRadius: 5,
+            padding: 10
+          }}
+          icon={{
+            name: 'color-wand',
+            type: 'ionicon',
+            size: 15,
+            color: 'white',
           }}
         />
         <AIResponse />
@@ -119,6 +157,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    maxWidth: 900,
   },
 });
