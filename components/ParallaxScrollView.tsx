@@ -1,17 +1,10 @@
 import { useState, type PropsWithChildren, type ReactElement } from 'react';
-import { StyleSheet, useColorScheme, View } from 'react-native';
-import Animated, {
-  interpolate,
-  useAnimatedRef,
-  useAnimatedStyle,
-  useScrollViewOffset,
-} from 'react-native-reanimated';
+import { Platform, SafeAreaView, ScrollView, StyleSheet, useColorScheme, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
-import { ThemedView } from '@/components/ThemedView';
-import { Icon, Switch } from '@rneui/themed';
 import { useStore } from '@/store/useStore';
-
-const HEADER_HEIGHT = 250;
+import { Icon, Switch } from '@rneui/themed';
+import { Misc } from '@/constants/Misc';
 
 type Props = PropsWithChildren<{
   headerImage: ReactElement;
@@ -23,58 +16,37 @@ export default function ParallaxScrollView({
   headerImage,
   headerBackgroundColor,
 }: Props) {
-  const colorScheme = useColorScheme() ?? 'light';
-  const scrollRef = useAnimatedRef<Animated.ScrollView>();
-  const scrollOffset = useScrollViewOffset(scrollRef);
+  const colorScheme = useColorScheme() ?? Misc.theme.light;
   const [checked, setChecked] = useState<boolean>(false);
   const toggleTheme = useStore((state) => state.toggleTheme);
 
   const toggleSwitch = () => {
     setChecked(!checked);
-    toggleTheme(checked ? 'light' : 'dark');
+    toggleTheme(checked ? Misc.theme.light : Misc.theme.dark);
   };
 
-  const headerAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateY: interpolate(
-            scrollOffset.value,
-            [-HEADER_HEIGHT, 0, HEADER_HEIGHT],
-            [-HEADER_HEIGHT / 2, 0, HEADER_HEIGHT * 0.75]
-          ),
-        },
-        {
-          scale: interpolate(scrollOffset.value, [-HEADER_HEIGHT, 0, HEADER_HEIGHT], [2, 1, 1]),
-        },
-      ],
-    };
-  });
-
   return (
-    <ThemedView style={styles.container}>
-      <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
         <Animated.View
           style={[
             styles.header,
             { backgroundColor: headerBackgroundColor[colorScheme] },
-            headerAnimatedStyle,
           ]}>
           {headerImage}
-          <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', right: 0, bottom: 10 }}>
-            <Icon
-              name='light-mode' />
+          <View style={styles.toggleContainer}>
+            <Icon name={Misc.icon.light} style={styles.icon} />
             <Switch
               value={checked}
               onValueChange={toggleSwitch}
+              style={styles.switch}
             />
-            <Icon
-              name='dark-mode' />
+            <Icon name={Misc.icon.dark} style={styles.icon} />
           </View>
         </Animated.View>
-        <ThemedView style={styles.content}>{children}</ThemedView>
-      </Animated.ScrollView>
-    </ThemedView>
+        {children}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -82,14 +54,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  contentContainer: {
+    flexGrow: 1, 
+  },
   header: {
-    height: 250,
     overflow: 'hidden',
+    flexDirection: Platform.OS === 'web' ? 'row' : 'column',
   },
-  content: {
-    flex: 1,
-    padding: 4,
-    gap: 16,
-    overflow: 'hidden',
+  icon: {
+    marginRight: 3,
   },
+  switch: {
+    marginHorizontal: 2,
+  },
+  toggleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center', 
+    position: 'absolute', 
+    right: 0, 
+    bottom: Platform.OS === 'android' ? -5 : 5,
+    maxWidth: 300,
+  }
 });

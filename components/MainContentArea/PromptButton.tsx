@@ -12,23 +12,28 @@ interface PromptButtonProps {
   width: number
 }
 
-export default function PromptButton({ prompt, width }: PromptButtonProps) {
-  const { title, icon, content } = prompt;
+export default function PromptButton(buttonProps: PromptButtonProps) {
+  const { title, icon, content } = buttonProps.prompt;
   const setInputText = useStore((state) => state.setInputText);
+
+  const payload = { width: buttonProps.width };
+  const width = lg(payload) ? 300 : sm(payload) ? 250 : 200;
+
+  const onPress = () => setInputText(content);
 
   return (
     <Button
       title={title}
-      onPress={() => setInputText(content)}
+      onPress={onPress}
       icon={<Icon
         name={icon}
         size={15}
-        style={{ marginRight: 3 }}
+        style={styles.icon}
       />}
       type='outline'
       buttonStyle={styles.buttonStyle}
       titleStyle={styles.titleStyle}
-      containerStyle={[{ width: lg({ width }) ? 300 : sm({ width }) ? 250 : 200 }, styles.containerStyle ]}
+      containerStyle={[{ width }, styles.containerStyle]}
     />
   );
 };
@@ -48,5 +53,8 @@ const styles = StyleSheet.create({
   containerStyle: {
     alignContent: 'flex-end',
     justifyContent: 'flex-end',
+  },
+  icon: {
+    marginRight: 3,
   }
 });

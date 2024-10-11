@@ -1,3 +1,4 @@
+import { Misc } from '@/constants/Misc';
 import { generateContent } from '@/services/generateContent';
 import { lg, md, sm } from '@/services/utils';
 import { useStore } from '@/store/useStore';
@@ -40,26 +41,13 @@ export default function MagicWriteButton() {
         onPress={handleSubmit}
         disabled={inputText.trim() === ''}
         buttonStyle={styles.buttonStyle}
-        icon={{
-          name: 'color-wand',
-          type: 'ionicon',
-          size: 15,
-          color: 'white',
-        }}
+        icon={Misc.magicWriteIcon}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   borderWidth: 1,
-  //   borderColor: 'green',
-  // },
-  buttonContainer: {
-    marginBottom: 0,
-    borderRadius: 13,
-  },
   buttonStyle: {
     backgroundColor: '#3b3b3b',
     borderRadius: 7,

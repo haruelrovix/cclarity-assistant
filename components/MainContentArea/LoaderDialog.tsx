@@ -15,7 +15,7 @@ export default function LoaderDialog({ isVisible }: Props) {
 
 const styles = StyleSheet.create({
   dialog: {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
+    backgroundColor: 'transparent',
     borderRadius: 20,
     width: 25,
     height: 25,

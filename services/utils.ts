@@ -1,15 +1,8 @@
-import { MutationStatus, useMutationState } from '@tanstack/react-query';
-
 export const xs = (window: { width: number; }) => window.width < 576;
 export const sm = (window: { width: number; }) => window.width >= 576;
 export const md = (window: { width: number; }) => window.width >= 768;
 export const lg = (window: { width: number; }) => window.width >= 992;
 export const xl = (window: { width: number; }) => window.width >= 1200;
-
-export const getMutationStatus = (status: MutationStatus) => useMutationState({
-  filters: { status },
-  select: (mutation) => mutation.state.status,
-});
 
 const consoleWarn = console.warn;
 const consoleInfo = console.info;

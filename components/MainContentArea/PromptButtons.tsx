@@ -11,14 +11,18 @@ export default function PromptButtons({ promptButtons }: PromptButtonsProps) {
   const dimensions = useStore((state) => state.dimensions);
   const numColumns = md(dimensions.window) ? 3 : 2;
 
+  const renderItem = ({ item }: any) => <PromptButton key={item.id} prompt={item} width={dimensions.window.width} />;
+
   return (
     <>
       <FlatList
         data={promptButtons}
-        renderItem={({ item }) => <PromptButton key={item.id} prompt={item} width={dimensions.window.width} />}
+        renderItem={renderItem}
         numColumns={numColumns}
         extraData={dimensions.window}
         key={numColumns}
+        nestedScrollEnabled={true}
+        scrollEnabled={false}
       />
     </>
   );
