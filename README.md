@@ -1,50 +1,59 @@
-# Welcome to your Expo app 👋
+# Welcome to CClarity Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a simplified version of the CClarity writing assistant interface, focusing on core functionality and clean implementation.<br />Built with [Expo](https://expo.dev).
+
+## LIVE DEMO 👉 [cclarity.semboja.tech](https://cclarity.semboja.tech)
+
+Deployed on S3 then exposed via CloudFront and Route53.
 
 ## Get started
 
-1. Install dependencies
+1. Clone the repository
 
    ```bash
-   npm install
+   ➜ git clone https://github.com/haruelrovix/cclarity-assistant
    ```
-
-2. Start the app
+2. Install dependencies
 
    ```bash
-    npx expo start
+   ➜ npm install
+   ```
+3. Create the `.env` file
+
+   ```bash
+   ➜ touch .env
+   ```
+4. Put the correct `API URL` and `API Key`
+
+   ```bash
+    EXPO_PUBLIC_API_BASE_URL=https://***
+    EXPO_PUBLIC_API_KEY=***
+   ```
+   _(Contact havit or inspect cclarity.semboja.tech's Network 😉 to grab the credentials)_
+5. Start the Web app
+
+   ```bash
+   ➜ npm run web
    ```
 
-In the output, you'll find options to open the app in a
+   It's running on `port:8081` by default.
+   <img width="1526" alt="image" src="https://github.com/user-attachments/assets/0bf40174-f765-43da-8397-8fb736aa9776">
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+If you have a React Native environment ready, simply press `a` to open it on Android emulator or `i` for iOS Simulator.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+[![iOS & Android, Watch the video](https://img.youtube.com/vi/Km0L7OGq2qw/0.jpg)](https://www.youtube.com/watch?v=Km0L7OGq2qw)
 
-## Get a fresh project
+## Responsivess
 
-When you're ready, run:
+[![WEB, Watch the video](https://img.youtube.com/vi/JqfHWmTIpD8/0.jpg)](https://www.youtube.com/watch?v=JqfHWmTIpD8)
 
-```bash
-npm run reset-project
-```
+## AI Backend
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+It's not on this repo unfortunately. But it's been deployed to AWS which has following stacks:
 
-## Learn more
+- Serverless
+- NestJS
+- Amazon Bedrock
+- Meta Llama 3 70B Instruct, Base Model (meta.llama3-70b-instruct-v1:0)
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Similar to the FE, the BE is exposed to the outside via API Gatewat & Route53.
