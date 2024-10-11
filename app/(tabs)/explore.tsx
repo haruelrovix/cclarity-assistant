@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -11,79 +11,53 @@ export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
+      headerImage={<Ionicons size={100} name='code-slash' style={styles.headerImage} />}>
+      <ThemedView style={styles.container}>
+        <ThemedText>A simplified version of the CClarity writing assistant interface, focusing on core functionality and clean implementation.</ThemedText>
+        <ThemedView style={styles.wrapper}>
+          <Collapsible title='User Interface ✔️'>
             <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
+              - "What do you want to write today?" heading ✅{'\n'}
+              - All 6 writing prompt buttons ✅{'\n'}
+              - Text input field with placeholder text ✅{'\n'}
+              - "Write with AI" button ✅
             </ThemedText>
-          ),
-        })}
-      </Collapsible>
+          </Collapsible>
+          <Collapsible title='Functionality ✔️'>
+            <ThemedText>
+              - Clicking a writing prompt button should update the input field's placeholder text ✅{'\n'}
+              - The "Write with AI" button should be disabled when the input field is empty ✅{'\n'}
+              - Clicking "Write with AI" should request an API call to an AI service ✅
+            </ThemedText>
+          </Collapsible>
+          <Collapsible title='AI Integration ✔️'>
+            <ThemedText>
+              - Integration with an AI service that returns a Response based on a Prompt ✅{'\n'}
+              - Implement a basic loading state while waiting for the AI response ✅{'\n'}
+              - Display the AI-generated content below the input field ✅
+            </ThemedText>
+          </Collapsible>
+          <Collapsible title='Responsive Design ✔️'>
+            <ThemedText>
+              - The interface is responsive for desktop and mobile views ✅
+            </ThemedText>
+          </Collapsible>
+          <Collapsible title='Tech Stacks'>
+            <ThemedText>
+              - <ThemedText type={'defaultSemiBold'}>Expo: 🌐📱✨{'\n'}</ThemedText>Create universal native apps with React that run on Android, iOS, and the web{'\n'}
+              - <ThemedText type={'defaultSemiBold'}>React Native Elements: ⚛️📦📲{'\n'}</ThemedText>A React Native framework for making cross platform applications{'\n'}
+              - <ThemedText type={'defaultSemiBold'}>TanStack Query: 🚀🔄📡{'\n'}</ThemedText>A powerful data-fetching library designed for managing server state in front-end applications{'\n'}
+              - <ThemedText type={'defaultSemiBold'}>Zustand: 🐻⚡📊{'\n'}</ThemedText>A small, fast, and scalable bearbones state management solution
+            </ThemedText>
+          </Collapsible>
+        </ThemedView>
+        <ThemedText>
+          by: Havit (surat@havit.web.id)
+        </ThemedText>
+        <ExternalLink href='mailto:surat@havit.web.id'>
+          <ThemedText type='link'>Send Email</ThemedText>
+        </ExternalLink>
+      </ThemedView>
     </ParallaxScrollView>
   );
 }
@@ -91,12 +65,17 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   headerImage: {
     color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+    width: 350,
+    height: Platform.OS === 'android' ? 120 : 100,
+    paddingLeft: 10,
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+  wrapper: {
+    justifyContent: 'flex-start',
+    margin: 10,
+  }
 });
