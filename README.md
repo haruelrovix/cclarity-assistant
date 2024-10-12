@@ -43,17 +43,37 @@ If you have a React Native environment ready, simply press `a` to open it on And
 
 [![iOS & Android, Watch the video](https://img.youtube.com/vi/Km0L7OGq2qw/0.jpg)](https://www.youtube.com/watch?v=Km0L7OGq2qw)
 
-## Responsivess
+## Responsiveness
 
 [![WEB, Watch the video](https://img.youtube.com/vi/JqfHWmTIpD8/0.jpg)](https://www.youtube.com/watch?v=JqfHWmTIpD8)
 
 ## AI Backend
 
-It's not on this repo unfortunately. But it's been deployed to AWS which has following stacks:
+Unfortunately, the code is not available in this repository. However, the project has been deployed to Amazon Web Services (AWS) with the following technology stack and architecture:
 
-- Serverless
-- NestJS
-- Amazon Bedrock
-- Meta Llama 3 70B Instruct, Base Model (meta.llama3-70b-instruct-v1:0)
+1. Backend Framework:
 
-Similar to the FE, the BE is exposed to the outside via API Gatewat & Route53.
+- NestJS: A progressive Node.js framework for building efficient and scalable server-side applications.
+
+2. Serverless Architecture:
+
+- AWS Lambda: For running code without provisioning or managing servers.
+
+3. AI/ML Integration:
+
+- Amazon Bedrock: A fully managed service that offers foundation models from leading AI companies.
+- Model: Meta Llama 3 70B Instruct, Base Model (`meta.llama3-70b-instruct-v1:0`)
+
+4. API Management:
+
+- Amazon API Gateway: To create, publish, maintain, monitor, and secure APIs at any scale.
+
+5. DNS Management:
+
+- Amazon Route 53: For routing end users to the application with low latency.
+
+6. Backend Exposure:
+
+- Similar to the frontend, the backend is exposed to external access via API Gateway and Route 53.
+
+This serverless architecture leverages AWS services to provide a scalable, maintainable, and cost-effective solution for AI-powered applications. The use of NestJS allows for structured and modular backend development, while Amazon Bedrock provides access to advanced language models like Meta's Llama 3.
